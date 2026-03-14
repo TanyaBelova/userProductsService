@@ -1,17 +1,13 @@
 package products.service.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.core.io.support.PropertiesLoaderSupport;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import products.service.model.Product;
-import products.service.model.UserProductRelations;
+import products.service.model.entity.Product;
+import products.service.model.entity.UserProductRelations;
 import products.service.repository.ProductRepository;
 import products.service.repository.UserProductsRelationsRepository;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

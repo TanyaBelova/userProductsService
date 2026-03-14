@@ -1,7 +1,8 @@
-package products.service.model;
+package products.service.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Table(name = "user_products_relations")
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserProductRelations {
 
     @Id

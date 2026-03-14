@@ -5,25 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import products.service.model.Product;
-import products.service.model.UserProductRelations;
+import products.service.mapper.ProductMapper;
+import products.service.model.dto.ProductDto;
+import products.service.model.entity.Product;
+import products.service.model.entity.UserProductRelations;
 import products.service.service.ProductsService;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 public class ProductController {
     private final ProductsService productService; // что это
-
-    @Autowired
-    // говорит спрингу, что в этом месте необходимо внедрить зависимость.
-    // В конструктор мы передаем интерфейс.
-    // Реализацию данного сервиса пометили аннотацией @Service ранее
-
-    public ProductController(ProductsService productService) {
-        this.productService = productService;
-    }
+    private final ProductMapper productMapper;
 
     // данный метод обрабатывает POST запросы на адрес /products
     @PostMapping(value = "/products")
@@ -34,8 +29,8 @@ public class ProductController {
 
     @GetMapping(value = "/products")
     // данный метод обрабатывает GET запросы на адрес /products
-    public ResponseEntity<List<Product>> readActive() {
-        final List<Product> products = productService.readActive();
+    public ResponseEntity<List<ProductDto>> readActive() {
+        List<ProductDto> products = productMapper.toProductDtoList(productService.readActive());
 
         return products != null &&  !products.isEmpty()
                 ? new ResponseEntity<>(products, HttpStatus.OK)
@@ -43,8 +38,8 @@ public class ProductController {
     }
 
     @GetMapping(value = "/products/{userId}")
-    public ResponseEntity<List<Product>> readActive(@PathVariable(name = "userId") UUID userId) {
-        final List<Product> products = productService.readActive(userId);
+    public ResponseEntity<List<ProductDto>> readActive(@PathVariable(name = "userId") UUID userId) {
+        List<ProductDto> products = productMapper.toProductDtoList(productService.readActive(userId));
 
         return products != null &&  !products.isEmpty()
                 ? new ResponseEntity<>(products, HttpStatus.OK)
@@ -56,8 +51,9 @@ public class ProductController {
 
         final boolean created = productService.createRelation(userProductRelations);
 
+
         return created
-                ? new ResponseEntity<>(HttpStatus.CREATED)
+                ? ResponseEntity.status(HttpStatus.CREATED).body(userProductRelations.getId())
                 : new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

@@ -1,9 +1,8 @@
 package products.service.service;
 
-import products.service.model.Product;
-import products.service.model.UserProductRelations;
+import products.service.model.entity.Product;
+import products.service.model.entity.UserProductRelations;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,7 +10,6 @@ public interface ProductsService {
 
     /**
      * Создает новую услугу
-     * @param product - услуга для создания
      */
     void create(String name);
 
