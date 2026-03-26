@@ -10,7 +10,7 @@ import products.service.model.entity.Product;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-15T00:38:02+0300",
+    date = "2026-03-26T22:25:35+0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 25 (Oracle Corporation)"
 )
 @Component

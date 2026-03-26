@@ -3,6 +3,7 @@ package products.service.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import products.service.model.dto.ProductDto;
 import products.service.model.entity.Product;
 import products.service.model.entity.UserProductRelations;
 import products.service.repository.ProductRepository;
@@ -22,12 +23,13 @@ public class ProductsServiceImpl implements ProductsService{
 
     @Override
     @Transactional
-    public void create(String name) {
+    public Product create(String name) {
         Product product = new Product();
         product.setName(name);
         product.setCreationDate(new Date());
         product.setActive(true);
         productRepository.save(product);
+        return product;
     }
 
     @Override

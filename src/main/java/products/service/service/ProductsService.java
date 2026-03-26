@@ -11,7 +11,7 @@ public interface ProductsService {
     /**
      * Создает новую услугу
      */
-    void create(String name);
+    Product create(String name);
 
     /**
      * Возвращает список всех имеющихся АКТИВНЫХ услуг

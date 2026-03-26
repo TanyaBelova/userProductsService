@@ -22,9 +22,9 @@ public class ProductController {
 
     // данный метод обрабатывает POST запросы на адрес /products
     @PostMapping(value = "/products")
-    public ResponseEntity<?> create(@RequestParam String name) {
-        productService.create(name);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<ProductDto> create(@RequestParam String name) {
+        ProductDto product = productMapper.toProductDto(productService.create(name));
+        return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/products")
